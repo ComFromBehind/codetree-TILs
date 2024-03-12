@@ -44,12 +44,14 @@ int main(){
 
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
+            
             garo(i,j);
             sero(i,j);
+            if(i==1&&j==1) cout<<ans;
             l_block(i,j);
         }
     }
-    cout<<ans;
+    
 
 
 }
