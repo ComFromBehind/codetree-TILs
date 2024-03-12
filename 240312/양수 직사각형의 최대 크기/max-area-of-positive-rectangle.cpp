@@ -10,7 +10,7 @@ int func(int a, int b,int c, int d){
    if(a+c>n||b+d>m) return -1;
    for(int i=0;i<c;i++){
         for(int j=0;j<d;j++){
-            if(arr[a+i][b+j]<0) return -1;
+            if(arr[a+i][b+j]<=0) return -1;
         }
    }
    return c*d;
