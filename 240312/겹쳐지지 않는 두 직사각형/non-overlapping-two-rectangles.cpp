@@ -7,8 +7,8 @@ bool check[6][6];
 int arr[6][6];
 
 void reset(int a,int b,int c,int d){
-    for(int i=0;i<c;i++){
-        for(int j=0;j<d;j++)
+    for(int i=0;i<=c;i++){
+        for(int j=0;j<=d;j++)
             check[a+i][b+j]=0;
     }
 }
