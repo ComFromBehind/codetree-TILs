@@ -9,7 +9,7 @@ int arr[21][21];
 void searching(int k,int a, int b){
     int temp=0;
     
-    while(k!=0){
+    while(k!=-1){
         int temp = 0;
         for(int i=-k;i<=k;i++){
             for(int j=-k;j<=k;j++){
