@@ -19,7 +19,7 @@ void searching(int k,int a, int b){
             }
         }
         payoff = k*k+(k+1)*(k+1);
-        if(payoff< m*temp){
+        if(payoff<= m*temp){
             ans = max(ans, temp);
         }
         k--;
