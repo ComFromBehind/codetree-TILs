@@ -37,21 +37,21 @@ void garo(int i, int j){
 int main(){
     cin>>n>>m;
     for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
+        for(int j=0;j<m;j++){
             cin>>arr[i][j];
         }
     }
 
     for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
+        for(int j=0;j<m;j++){
             
             garo(i,j);
             sero(i,j);
-            if(i==1&&j==1) cout<<ans;
             l_block(i,j);
         }
     }
     
+    cout<<ans;
 
 
 }
