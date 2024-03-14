@@ -42,11 +42,16 @@ int main() {
 
     cin >> s;
 
+
+
     for (int i = 0;i < s.length();i++) {
         vec.clear();
         shift();
         counting();
     }
+
+    if (s.length() == 1)
+        ans = 2;
 
     cout << ans;
 
