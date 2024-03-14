@@ -76,10 +76,11 @@ int main() {
         }
     }
 
-    cin >> r >> wind;
-    r = r - 1;
+  
 
     while (q--) {
+        cin >> r >> wind;
+        r = r - 1;
         if (wind == 'L') dir = 0;
         else dir = 1;
 
