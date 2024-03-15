@@ -36,8 +36,13 @@ int main() {
     }
     
     count = count - (e2-s2+1);
-    
+
+
+
     cout<<count<<"\n";
+
+    if(count==0) 
+        exit(0);
 
     for(int i=0;i<n;i++){
         if(arr[i]>0){
