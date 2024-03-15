@@ -18,7 +18,7 @@ int main() {
     cin>>s1>>e1>>s2>>e2;
 
     for(int i=0;i<n;i++){
-        if(i>=s1-1&&i<=e1-1) arr[i]=0;
+        if(i>=(s1-1)&&i<=(e1-1)) arr[i]=0;
     }
     
     int count = 0;
