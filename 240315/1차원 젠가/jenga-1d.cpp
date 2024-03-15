@@ -20,15 +20,11 @@ int main() {
     for(int i=0;i<n;i++){
         if(i>=s1-1&&i<=e1-1) arr[i]=0;
     }
-
-    for(int i=0;i<n;i++){
-        brr[i]=arr[i];
-    }
     
     int count = 0;
     for(int i=0;i<n;i++){
         if(arr[i]>0) count++; 
-        if(count>=(s2-1)&&count<=(e2-1)) brr[i] = 0;
+        if(count>=(s2-1)&&count<=(e2-1)) arr[i] = 0;
     }
 
     count = count - (e2-s2+1);
@@ -41,9 +37,9 @@ int main() {
         exit(0);
 
     for(int i=0;i<n;i++){
-        if(brr[i]>0){
+        if(arr[i]>0){
 
-            cout<<brr[i]<<"\n";
+            cout<<arr[i]<<"\n";
         }
     }
    
