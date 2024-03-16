@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 int n, m;
@@ -57,6 +56,12 @@ int counting() { //v -> 실제 배열, w -> 중복에 대한 index
 int main() {
     
     cin >> n >> m;
+
+    if (m == 1)
+    {
+        cout << 0;
+        exit(0);
+    }
 
     int cnt = 0;
 
