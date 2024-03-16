@@ -23,7 +23,7 @@ void bomb(int row, int col){
     }
 
     for(int i=0;i<n;i++){
-        if(i<col-(size-1)||i>col+(size+1)) continue;
+        if(i<col-(size-1)||i>col+(size-1)) continue;
     
         for(int j=n-1;j>0;j--){
             int k=j;
