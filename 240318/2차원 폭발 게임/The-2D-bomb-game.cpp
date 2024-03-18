@@ -24,9 +24,9 @@ void bomb() {
 
         vector<pair<int, int>> v;
 
-        v.push_back({ arr[0][i],1 });
-
-        for (int j = 1;j < n;j++) {
+        
+        for (int j = 0;j < n;j++) {
+            if(j!=n-1){
             if(v.empty()){
                 v.push_back({arr[j][i],1});
             }
@@ -40,17 +40,39 @@ void bomb() {
                 
                 if(v.back().second>=m)
                     v.pop_back();
-                if(v.empty()) v.push_back({arr[j][i],1});
-                else{
+                if(v.empty()) {
+                    v.push_back({arr[j][i],1});
+                }
+                else if(arr[j][i]==v[v.size()-1].first){
                     v[v.size()-1].second++;
                 }
+                else{
+                    v.push_back({arr[j][i],1});
+                }
             }
-
-            if (j == n - 1 && v.back().second >= m)  {
+            }
+            if (j == n - 1)  {
+                if(v.empty()){
+                    v.push_back({arr[j][i],1});
+                }
+                
+                else if(v[v.size()-1].first==arr[j][i]){
+                    if(v[v.size()-1].second>=m-1)
+                        v.pop_back();
+                    else{
+                        v[v.size()-1].second++;
+                    }
+                }
+                else {
+                    if(v[v.size()-1].second>=m)
+                        v.pop_back();
                     
-                    v.pop_back();
+                    v.push_back({arr[j][i],1});
+                }
+            }  
+        
 
-            }
+            
         }
         
         int st = 0;
@@ -117,13 +139,10 @@ int main() {
     }
 
     while (k--) {
-
-
         bomb();
         fall();
-        rotate();
+        rotate();        
         fall();
-
     }
 
     int ans = 0;
