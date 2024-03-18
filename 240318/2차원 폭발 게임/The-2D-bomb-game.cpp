@@ -11,23 +11,26 @@ int brr[101][101];
 void bomb(){
     for(int i=0;i<n;i++){
         vector<int> v;
-        
-        v.push_back(0);
+    
         for(int j=1;j<n;j++){
-            if(arr[j][i]!=arr[j-1][i]&&arr[j-1][i]!=0)
+            if(arr[j][i]!=arr[j-1][i])
                 v.push_back(j-1);
         }
         v.push_back(n-1);
 
-        for(int j=1;j<v.size();j++){
-            if(v[j]-v[j-1]>=m-1){
-                if(j==1){
-                    for(int k=v[j-1];k<=v[j];k++){
-                        arr[k][i]=0;
+        for(int j=0;j<v.size();j++){
+            if(j==0){
+                if(v[j]>=(m-1)){
+                    for(int k=0;k<=v[j];k++){
+                        arr[k][i] = 0;
                     }
                 }
-                for(int k=v[j-1]+1;k<=v[j];k++){
-                    arr[k][i] =0;
+            }
+            else{
+                if(v[j]-v[j-1]>=m){
+                    for(int k=v[j-1]+1;k<=v[j];k++){
+                        arr[k][i]=0;
+                    }
                 }
             }
             
@@ -68,6 +71,15 @@ void fall(){
         }
     }
 }
+void print(){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cout<<arr[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
+}
 
 int main(){
     cin>>n>>m>>k;
@@ -88,17 +100,21 @@ int main(){
         fall();
         rotate();
         fall();
-        
-    
+                 
     }
     
     int ans = 0;
     
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
+            
+        
             if(arr[i][j]!=0)
                 ans++;
         }
+       
     }
+
+
     cout<<ans;
 }
