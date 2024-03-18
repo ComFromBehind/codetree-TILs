@@ -36,10 +36,10 @@ void bomb() {
 
 
 
-            else if (arr[j][i] != arr[j - 1][i]) {
-                while (!v.empty()&&v.back().second >= m) {
-                    v.erase(v.end() - 1);
-                }
+            else if (arr[j][i] != v[v.size()-1].first) {
+                
+                if(v.back().second>=m)
+                    v.pop_back();
                 v.push_back({ arr[j][i],1 });
             }
 
