@@ -68,6 +68,11 @@ void fall(){
 int main(){
     cin>>n>>m>>k;
     
+    if(m==1){
+        cout<<0;
+        exit(0);
+    }
+
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++)
             cin>>arr[i][j];
