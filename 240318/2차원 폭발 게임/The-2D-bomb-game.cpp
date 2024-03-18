@@ -20,58 +20,44 @@ void print() {
 }
 
 void bomb() {
-    for (int i = 0;i < n;i++) {
-
-        vector<pair<int, int>> v;
-
-        for (int j = 0;j < n;j++) {
-            if (arr[j][i] == 0) continue;
-            if (v.empty()) {
-                v.push_back({ arr[j][i],1 });
-            }
-            else if (arr[j][i] == v[v.size() - 1].first) {
-                v[v.size() - 1].second++;
-                if (j == n - 1) {
-                    if (v[v.size() - 1].second >= m)
-                        v.pop_back();
+    
+    int flag = 0;
+    while (flag == 0) {
+        int cnt = 0;
+        flag = 1;
+        for (int i = 0;i < n;i++) {
+            for (int j = 0;j < n;j++) {
+               
+                int t = j;
+                cnt = 0;
+                int nx = arr[j][i];
+                while (nx == arr[t][i]) {
+                    
+                    if (arr[t][i] == 0) {t++;continue;}
+                    nx = arr[t][i];
+                    cnt++;
+                    t++;
+                    if (t == n) break;
                 }
-            }
-            else if (arr[j][i] != v[v.size() - 1].first) {
+                if (cnt >= m) {
+                    flag = 0;
+                    int k = 0;
+                    int cnt2 = 0;
+                    while (cnt2 != cnt) {
 
-                if (v.back().second >= m)
-                    v.pop_back();
-                if (v.empty()) {
-                    v.push_back({ arr[j][i],1 });
-                }
-                else if (arr[j][i] == v[v.size() - 1].first) {
-                    v[v.size() - 1].second++;
-                    if (j == n - 1) {
-                        if (v[v.size() - 1].second >= m)
-                            v.pop_back();
+                        if (arr[j + k][i] == 0) {
+                            k++;continue;
+                        }
+                        arr[j + k][i] = 0;
+                        cnt2++;
+
                     }
                 }
-                else {
-                    v.push_back({ arr[j][i],1 });
-                }
-            }
-
-
-        }
-
-        int st = 0;
-        for (int j = 0;j < v.size();j++) {
-            for (int t = 0;t < v[j].second;t++) {
-                arr[st][i] = v[j].first;
-                st++;
             }
         }
-        for (int j = st;j < n;j++) {
-            arr[st][i] = 0;
-            st++;
-        }
+        
     }
 }
-
 
 
 void rotate() { // 시계방향으로 회전.. 
@@ -109,7 +95,7 @@ void fall() {
 
 
 int main() {
-   
+
     cin >> n >> m >> k;
 
     if (m == 1) {
@@ -121,16 +107,17 @@ int main() {
         for (int j = 0;j < n;j++)
             cin >> arr[i][j];
     }
+    
 
     while (k--) {
         bomb();
         fall();
         rotate();
         fall();
-        
     }
     bomb();
     fall();
+
     int ans = 0;
 
     for (int i = 0;i < n;i++) {
