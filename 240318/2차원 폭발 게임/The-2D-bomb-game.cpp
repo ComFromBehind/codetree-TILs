@@ -27,7 +27,10 @@ void bomb() {
         v.push_back({ arr[0][i],1 });
 
         for (int j = 1;j < n;j++) {
-            if (arr[j][i] == arr[j - 1][i]) {
+            if(v.empty()){
+                v.push_back({arr[j][i],1});
+            }
+            else if (arr[j][i] == v[v.size()-1].first) {
                 v[v.size() - 1].second++;
 
                 if (j == n - 1 && v.back().second >= m)
