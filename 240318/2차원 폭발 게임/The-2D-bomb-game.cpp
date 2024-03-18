@@ -40,7 +40,10 @@ void bomb() {
                 
                 if(v.back().second>=m)
                     v.pop_back();
-                v.push_back({ arr[j][i],1 });
+                if(v.empty()) v.push_back({arr[j][i],1});
+                else{
+                    v[v.size()-1].second++;
+                }
             }
 
             if (j == n - 1 && v.back().second >= m)  {
