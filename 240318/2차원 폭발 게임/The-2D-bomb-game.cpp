@@ -32,13 +32,6 @@ void bomb() {
             }
             else if (arr[j][i] == v[v.size()-1].first) {
                 v[v.size() - 1].second++;
-
-                if (j == n - 1 && v.back().second >= m)
-                {
-                    
-                    v.pop_back();
-
-                }
             }
 
 
@@ -48,6 +41,12 @@ void bomb() {
                     v.erase(v.end() - 1);
                 }
                 v.push_back({ arr[j][i],1 });
+            }
+
+            if (j == n - 1 && v.back().second >= m)  {
+                    
+                    v.pop_back();
+
             }
         }
         
