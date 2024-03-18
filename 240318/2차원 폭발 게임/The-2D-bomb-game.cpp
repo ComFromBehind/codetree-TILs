@@ -21,7 +21,11 @@ void bomb(){
 
         for(int j=1;j<v.size();j++){
             if(v[j]-v[j-1]>=m-1){
-                
+                if(j==1){
+                    for(int k=v[j-1];k<=v[j];k++){
+                        arr[k][i]=0;
+                    }
+                }
                 for(int k=v[j-1]+1;k<=v[j];k++){
                     arr[k][i] =0;
                 }
@@ -85,6 +89,13 @@ int main(){
         rotate();
         fall();
         
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                cout<<arr[i][j]<<" ";
+            }
+            cout<<"\n";
+        }
+        cout<<"\n\n"
     }
     
     int ans = 0;
