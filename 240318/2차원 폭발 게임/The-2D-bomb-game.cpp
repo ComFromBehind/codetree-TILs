@@ -8,7 +8,8 @@ int arr[101][101];
 int brr[101][101];
 
 
-void bomb(){
+int bomb(){
+    int flag=0;
     for(int i=0;i<n;i++){
         vector<int> v;
     
@@ -16,11 +17,12 @@ void bomb(){
             if(arr[j][i]!=arr[j-1][i])
                 v.push_back(j-1);
         }
-        v.push_back(n-1);
+        
 
         for(int j=0;j<v.size();j++){
             if(j==0){
                 if(v[j]>=(m-1)){
+                    flag=1;
                     for(int k=0;k<=v[j];k++){
                         arr[k][i] = 0;
                     }
@@ -28,6 +30,7 @@ void bomb(){
             }
             else{
                 if(v[j]-v[j-1]>=m){
+                    flag=1;
                     for(int k=v[j-1]+1;k<=v[j];k++){
                         arr[k][i]=0;
                     }
@@ -37,6 +40,7 @@ void bomb(){
         }
         
     }
+    return flag;
 }
 
 void rotate(){ // 시계방향으로 회전.. 
@@ -96,7 +100,13 @@ int main(){
 
     while(k--){
         
-        bomb();
+        
+        int c = bomb();
+        while(c!=0){
+            fall();
+            c = bomb();
+        }
+        
         fall();
         rotate();
         fall();
