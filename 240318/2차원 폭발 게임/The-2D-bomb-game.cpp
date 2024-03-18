@@ -23,41 +23,41 @@ void bomb() {
     for (int i = 0;i < n;i++) {
 
         vector<pair<int, int>> v;
-        
+
         for (int j = 0;j < n;j++) {
-            if(arr[j][i]==0) continue;
-            if(v.empty()){
-                v.push_back({arr[j][i],1});
+            if (arr[j][i] == 0) continue;
+            if (v.empty()) {
+                v.push_back({ arr[j][i],1 });
             }
-            else if (arr[j][i] == v[v.size()-1].first) {
+            else if (arr[j][i] == v[v.size() - 1].first) {
                 v[v.size() - 1].second++;
-                if(j==n-1){
-                    if(v[v.size()-1].second>=m)
+                if (j == n - 1) {
+                    if (v[v.size() - 1].second >= m)
                         v.pop_back();
                 }
             }
-            else if (arr[j][i] != v[v.size()-1].first) {
-                
-                if(v.back().second>=m)
+            else if (arr[j][i] != v[v.size() - 1].first) {
+
+                if (v.back().second >= m)
                     v.pop_back();
-                if(v.empty()) {
-                    v.push_back({arr[j][i],1});
+                if (v.empty()) {
+                    v.push_back({ arr[j][i],1 });
                 }
-                else if(arr[j][i]==v[v.size()-1].first){
-                    v[v.size()-1].second++;
-                    if(j==n-1){
-                        if(v[v.size()-1].second>=m)
+                else if (arr[j][i] == v[v.size() - 1].first) {
+                    v[v.size() - 1].second++;
+                    if (j == n - 1) {
+                        if (v[v.size() - 1].second >= m)
                             v.pop_back();
                     }
                 }
-                else{
-                    v.push_back({arr[j][i],1});
+                else {
+                    v.push_back({ arr[j][i],1 });
                 }
             }
-            
-           
-        }  
-        
+
+
+        }
+
         int st = 0;
         for (int j = 0;j < v.size();j++) {
             for (int t = 0;t < v[j].second;t++) {
@@ -109,6 +109,7 @@ void fall() {
 
 
 int main() {
+   
     cin >> n >> m >> k;
 
     if (m == 1) {
@@ -124,20 +125,22 @@ int main() {
     while (k--) {
         bomb();
         fall();
-        rotate();        
+        rotate();
         fall();
+        
     }
-
+    bomb();
+    fall();
     int ans = 0;
 
     for (int i = 0;i < n;i++) {
         for (int j = 0;j < n;j++) {
 
-            
+
             if (arr[i][j] != 0)
                 ans++;
         }
-       
+
 
     }
 
