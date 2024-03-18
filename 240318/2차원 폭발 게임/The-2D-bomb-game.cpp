@@ -25,7 +25,7 @@ void bomb() {
         vector<pair<int, int>> v;
         
         for (int j = 0;j < n;j++) {
-        
+            if(arr[j][i]==0) continue;
             if(v.empty()){
                 v.push_back({arr[j][i],1});
             }
