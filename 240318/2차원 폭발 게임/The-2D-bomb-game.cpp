@@ -23,19 +23,19 @@ void bomb() {
     for (int i = 0;i < n;i++) {
 
         vector<pair<int, int>> v;
-
         
         for (int j = 0;j < n;j++) {
-            if(j!=n-1){
+        
             if(v.empty()){
                 v.push_back({arr[j][i],1});
             }
             else if (arr[j][i] == v[v.size()-1].first) {
                 v[v.size() - 1].second++;
+                if(j==n-1){
+                    if(v[v.size()-1].second>=m)
+                        v.pop_back();
+                }
             }
-
-
-
             else if (arr[j][i] != v[v.size()-1].first) {
                 
                 if(v.back().second>=m)
@@ -45,35 +45,18 @@ void bomb() {
                 }
                 else if(arr[j][i]==v[v.size()-1].first){
                     v[v.size()-1].second++;
+                    if(j==n-1){
+                        if(v[v.size()-1].second>=m)
+                            v.pop_back();
+                    }
                 }
                 else{
                     v.push_back({arr[j][i],1});
                 }
             }
-            }
-            if (j == n - 1)  {
-                if(v.empty()){
-                    v.push_back({arr[j][i],1});
-                }
-                
-                else if(v[v.size()-1].first==arr[j][i]){
-                    if(v[v.size()-1].second>=m-1)
-                        v.pop_back();
-                    else{
-                        v[v.size()-1].second++;
-                    }
-                }
-                else {
-                    if(v[v.size()-1].second>=m)
-                        v.pop_back();
-                    
-                    v.push_back({arr[j][i],1});
-                }
-            }  
-        
-
             
-        }
+           
+        }  
         
         int st = 0;
         for (int j = 0;j < v.size();j++) {
@@ -82,13 +65,13 @@ void bomb() {
                 st++;
             }
         }
-
         for (int j = st;j < n;j++) {
             arr[st][i] = 0;
             st++;
         }
     }
 }
+
 
 
 void rotate() { // 시계방향으로 회전.. 
