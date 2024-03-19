@@ -31,10 +31,10 @@ void bomb() {
                 int t = j;
                 cnt = 0;
                 int nx = arr[j][i];
-                while (t<n&&nx == arr[t][i]) {
+                if (nx == 0) continue;
+                while (t<n&&nx == arr[t][i]||arr[t][i]==0) {
                     
                     if (arr[t][i] == 0) {t++;continue;}
-                    nx = arr[t][i];
                     cnt++;
                     t++;
                     if (t == n) break;
