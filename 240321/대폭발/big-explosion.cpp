@@ -23,7 +23,7 @@ void bomb(int t, int r, int c, int now){
     if(now==t+1) return;
     
     if(flag==0){
-        
+        w.clear();
         if(now==0) {
             arr[r][c] = 1;
             w.push_back({r,c});
@@ -32,6 +32,7 @@ void bomb(int t, int r, int c, int now){
             
         }
         else{
+            w.clear();
         for(int i=0;i<v.size();i++){
             for(int j=0;j<4;j++){
                 
@@ -50,7 +51,7 @@ void bomb(int t, int r, int c, int now){
         }
     }
     else{
-        
+        v.clear();
         for(int i=0;i<w.size();i++){
             for(int j=0;j<4;j++){
                 int nx = w[i].first+pow(2,now-1)*dx[j];
