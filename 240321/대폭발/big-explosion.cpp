@@ -23,7 +23,7 @@ void bomb(int t, int r, int c, int now){
     if(now==t+1) return;
     
     if(flag==0){
-        w.clear();
+        
         if(now==0) {
             arr[r][c] = 1;
             w.push_back({r,c});
@@ -32,11 +32,13 @@ void bomb(int t, int r, int c, int now){
             
         }
         else{
-            w.clear();
+            
+        w = v;
+
         for(int i=0;i<v.size();i++){
             for(int j=0;j<4;j++){
                 
-
+                    
                 
                 int nx = v[i].first+pow(2,now-1)*dx[j];
                 int ny = v[i].second+pow(2,now-1)*dy[j];
@@ -47,29 +49,42 @@ void bomb(int t, int r, int c, int now){
                 w.push_back({nx,ny});
             }
         }
+        v = w;
         flag=1;
         }
     }
     else{
-        v.clear();
-        for(int i=0;i<w.size();i++){
+        w.clear();
+        w = v;
+        for(int i=0;i<v.size();i++){
             for(int j=0;j<4;j++){
-                int nx = w[i].first+pow(2,now-1)*dx[j];
-                int ny = w[i].second+pow(2,now-1)*dy[j];
+                int nx = v[i].first+pow(2,now-1)*dx[j];
+                int ny = v[i].second+pow(2,now-1)*dy[j];
 
                 if(nx<0||nx>=n||ny<0||ny>=n) continue;
                 if(arr[nx][ny]!=0) continue;
                 arr[nx][ny] = 1;
-                v.push_back({nx,ny});
+                w.push_back({nx,ny});
             }
         }
         flag=0;
+        v = w;
     }
 
     
     
     bomb(t,r,c,now+1);
     
+}
+
+void print(){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cout<<arr[i][j]<<" "; 
+        }
+        cout<<"\n";
+    }
+    cout<<"\n\n";
 }
 
 int main() {
