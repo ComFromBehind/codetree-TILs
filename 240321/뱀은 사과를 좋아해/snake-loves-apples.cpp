@@ -76,7 +76,7 @@ int main() {
             if (arr[nx][ny] = -1) {
                 v.push_back({ tail_row,tail_col }); //꼬리 붙여주기
                 arr[tail_row][tail_col] = 1;
-                ans++;
+           
                 tail_flag = 0;
             }
 
