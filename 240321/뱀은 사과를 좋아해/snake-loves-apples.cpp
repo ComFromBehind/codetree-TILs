@@ -24,6 +24,16 @@ int dir_translate () {
     else if (dir == 'D') return 0;
 }
 
+void print() {
+    for (int i = 0;i < n;i++) {
+        for (int j = 0;j < n;j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << ans<<"\n\n";
+}
+
 int main() {
     cin >> n >> m >> k;
 
@@ -42,18 +52,18 @@ int main() {
     }
     k = tmp;
     tmp = 0;
+    arr[0][0] = 1;
+    
+
     while (tmp!=k) {
         dir = w[tmp].first;
         p = w[tmp].second;
-        int tail_flag = 0;
+        int tail_flag = 1;
         while (p--) {
             ans++;
             tail_flag = 1;
             int tail_row = v.back().first;
             int tail_col = v.back().second;
-
-          
-            
             
             int head_row = v.front().first;
             int head_col = v.front().second;
@@ -68,26 +78,27 @@ int main() {
                 exit(0); // 벽과 부딪혀서 끝남. 여기서 종료
             }
 
-            if (arr[nx][ny] > 0 || (nx==tail_row&&ny==tail_col)) {
+            if (arr[nx][ny] > 0 && (nx!=tail_row||ny!=tail_col)) {
                 cout << ans;
                 exit(0); // 자기 몸뚱아리에 부딪혀서 끝남. 여기서 종료
             }
             
-            if (arr[nx][ny] = -1) {
-                v.push_back({ tail_row,tail_col }); //꼬리 붙여주기
-                arr[tail_row][tail_col] = 1;
-           
+            if (arr[nx][ny] == -1) {
                 tail_flag = 0;
             }
 
-            arr[nx][ny] = 1;
+            
             v.insert(v.begin(), { nx,ny });
-
+            
             if (tail_flag == 1) {
                 arr[tail_row][tail_col] = 0;
                 v.pop_back(); //꼬리를 잘라준다. 
+
             }
+            arr[nx][ny] = 1;
+          
         }
+        
         tmp++;
     }
 
