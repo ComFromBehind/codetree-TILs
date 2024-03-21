@@ -48,7 +48,7 @@ void going(){
         return;
     }
     if(arr[nx][ny] == '#'){
-        move_dir();
+        now_dir=(now_dir+3)%4;
     }
     else{
         x = nx;
