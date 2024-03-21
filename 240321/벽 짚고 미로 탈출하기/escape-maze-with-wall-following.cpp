@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
 
@@ -61,7 +60,6 @@ void going() {
 
 int main() {
 
-    freopen("input.txt", "r", stdin);
     cin >> n >> x >> y;
 
     for (int i = 0;i < n;i++) {
@@ -107,7 +105,7 @@ int main() {
             exit(0);
         }
 
-
+        
         
 
     }
