@@ -16,6 +16,7 @@ int dy[4] = {1,0,-1,0};
 int ans;
 int now_dir;
 int move_flag; //이미 벽이없는 상태에서 회전을 했을 때, 그대로 전진함.
+int double_check; // 중복된 체크 두번 발생하면 fail;
 bool right_check(int x, int y, int nowdir){
     int wall_loc = (nowdir+1)%4;
 
@@ -72,25 +73,39 @@ int main() {
     
 
 
-    while(!check[x][y][now_dir]){
+    while(1){
+        if(double_check==1&&check[x][y][now_dir]!=0) {
+            cout<<-1;
+            exit(0);
+        }
+        else if(check[x][y][now_dir]!=0) double_check=1;
+        
         check[x][y][now_dir]=1;
         
         if(right_check(x,y,now_dir)){
             going();
-        }
-        else if(move_flag==0){
-            move_dir();
-            move_flag=1;
-        }
-        else{
-            going();
             move_flag=0;
+        }
+        
+        else{
+            
+            if(move_flag==0){
+                move_flag=1;move_dir();
+            }
+            else{
+                move_flag=0; going();
+            }
+            
+            
         }
         if(x<0||x>=n||y<0||y>=n){
             cout<<ans;
             exit(0);
         }
 
+        
+
+        
     }
 
     cout<<-1; //실패시 -1 출력
