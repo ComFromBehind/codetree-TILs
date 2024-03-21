@@ -45,9 +45,10 @@ int main() {
     while (tmp!=k) {
         dir = w[tmp].first;
         p = w[tmp].second;
+        int tail_flag = 0;
         while (p--) {
             ans++;
-
+            tail_flag = 1;
             int tail_row = v.back().first;
             int tail_col = v.back().second;
 
@@ -75,13 +76,17 @@ int main() {
             if (arr[nx][ny] = -1) {
                 v.push_back({ tail_row,tail_col }); //꼬리 붙여주기
                 arr[tail_row][tail_col] = 1;
+                ans++;
+                tail_flag = 0;
             }
 
             arr[nx][ny] = 1;
             v.insert(v.begin(), { nx,ny });
 
-            arr[tail_row][tail_col] = 0;
-            v.pop_back(); //꼬리를 잘라준다. 
+            if (tail_flag == 1) {
+                arr[tail_row][tail_col] = 0;
+                v.pop_back(); //꼬리를 잘라준다. 
+            }
         }
         tmp++;
     }
