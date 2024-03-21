@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <math.h>
 using namespace std;
 
 int n;
@@ -23,10 +24,21 @@ void bomb(int t, int r, int c, int now){
     
     if(flag==0){
         
+        if(now==0) {
+            arr[r][c] = 1;
+            w.push_back({r,c});
+            flag=1;
+            
+            
+        }
+        else{
         for(int i=0;i<v.size();i++){
             for(int j=0;j<4;j++){
-                int nx = v[i].first+now*dx[j];
-                int ny = v[i].second+now*dy[j];
+                
+
+                
+                int nx = v[i].first+pow(2,now-1)*dx[j];
+                int ny = v[i].second+pow(2,now-1)*dy[j];
 
                 if(nx<0||nx>=n||ny<0||ny>=n) continue;
                 if(arr[nx][ny]!=0) continue;
@@ -35,12 +47,14 @@ void bomb(int t, int r, int c, int now){
             }
         }
         flag=1;
+        }
     }
     else{
+        
         for(int i=0;i<w.size();i++){
             for(int j=0;j<4;j++){
-                int nx = w[i].first+now*dx[j];
-                int ny = w[i].second+now*dy[j];
+                int nx = w[i].first+pow(2,now-1)*dx[j];
+                int ny = w[i].second+pow(2,now-1)*dy[j];
 
                 if(nx<0||nx>=n||ny<0||ny>=n) continue;
                 if(arr[nx][ny]!=0) continue;
@@ -51,12 +65,14 @@ void bomb(int t, int r, int c, int now){
         flag=0;
     }
 
+    
+    
     bomb(t,r,c,now+1);
     
 }
 
 int main() {
-
+    
     cin>>n;
     cin>>m>>r>>c;
 
