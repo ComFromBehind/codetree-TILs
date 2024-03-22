@@ -4,6 +4,7 @@ using namespace std;
 int n,m,t;
 int arr[21][21];
 int brr[21][21];
+int crr[21][21];
 int r,c;
 int dx[4] = {-1, 1, 0, 0};
 int dy[4] = {0, 0, -1, 1};
@@ -11,7 +12,7 @@ int dy[4] = {0, 0, -1, 1};
 void reset(){
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++)
-            brr[i][j] = 0;
+            crr[i][j] = 0;
     }
 }
 
@@ -29,13 +30,13 @@ void move(int row,int col){
         }
     }
 
-    brr[row+dx[max_idx]][col+dy[max_idx]]++;
+    crr[row+dx[max_idx]][col+dy[max_idx]]++;
 }
 
 void crash_check(){
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){           
-            if(brr[i][j]>1) brr[i][j] = 0;
+            if(crr[i][j]>1) crr[i][j] = 0;
         }
     }
 }
@@ -43,7 +44,7 @@ void crash_check(){
 void copy(){
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
-            arr[i][j] = brr[i][j];
+            brr[i][j] = crr[i][j];
         }
     }
 }
@@ -58,26 +59,29 @@ int main(){
     while(m--){
         cin>>r>>c;
         
-        arr[r-1][c-1] = 1;
+        brr[r-1][c-1] = 1;
     }
     while(t--){
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                if(arr[i][j]!=0){
+                if(brr[i][j]!=0){
                     move(i,j);
 
                 }
             }
         }
+
         crash_check();
         copy();
         reset();
+
+        
     }
 
     int ans = 0;
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
-            if(arr[i][j]==1) ans++; 
+            if(brr[i][j]==1) ans++; 
         }
     }
     cout<<ans;
