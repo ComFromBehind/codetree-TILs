@@ -76,6 +76,7 @@ void move() {
 		}
 	}
 	else {
+		if (temp.size() == 0) return;
 		for (int i = temp.size() - 1;i >= 0;i--) {
 			arr[row][col].insert(arr[row][col].begin(), temp[i]);
 		}
