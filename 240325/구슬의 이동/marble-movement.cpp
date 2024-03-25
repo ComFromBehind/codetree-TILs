@@ -76,7 +76,7 @@ int main() {
 		int cnt = 1;
 		vector<int> eraser;
 		for (int i = 1;i < v.size();i++) {
-			if (get<0>(v[i]) == get<0>(v[i - 1]) && get<1>(v[i]) == get<1>(v[1])){
+			if (get<0>(v[i]) == get<0>(v[i - 1]) && get<1>(v[i]) == get<1>(v[1-1])){
 				cnt++;
 				if (cnt > k) {
 					eraser.push_back(i);
