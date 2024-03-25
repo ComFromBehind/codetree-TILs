@@ -68,6 +68,8 @@ void move() {
 		arr[row][col].erase(arr[row][col].begin());
 	}
 
+	if (temp.size() == 0) return;
+
 	int dir = find_max_loc(row, col);
 
 	if (dir != -1) {
