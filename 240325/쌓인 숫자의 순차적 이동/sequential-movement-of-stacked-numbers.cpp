@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -5,8 +7,7 @@ using namespace std;
 
 int n, m;
 
-string arr[21][21];
-int brr[21][21]; 
+vector<vector<vector<int>>> v(21,vector<vector<int>>(21));
 
 int dx[8] = { -1,-1,-1,0,0,1,1,1 };
 int dy[8] = { -1,0,1,-1,1,-1,0,1 };
@@ -19,8 +20,8 @@ void find(int k) {
 	
 	for (int i = 0;i < n;i++) {
 		for (int j = 0;j < n;j++) {
-			for (int t = 0;t < arr[i][j].size();t++) {
-				if (arr[i][j][t] - '0' == k) {
+			for (int t = 0;t < v[i][j].size();t++) {
+				if (v[i][j][t]== k) {
 					row = i;
 					col = j;
 					height = t;
@@ -41,15 +42,15 @@ int find_max_loc(int r, int c) {
 		if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
 		
 		
-		if (arr[nx][ny].empty()) {
+		if (v[nx][ny].empty()) {
 			continue;
 		}
 
 
-		for (int j = 0;j < arr[nx][ny].size();j++) {
-			if ((arr[nx][ny][j] - '0') > max_val) {
+		for (int j = 0;j < v[nx][ny].size();j++) {
+			if (v[nx][ny][j] > max_val) {
 				max_idx = i;
-				max_val = arr[nx][ny][j] - '0';
+				max_val = v[nx][ny][j];
 			}
 		}
 	}
@@ -59,13 +60,15 @@ int find_max_loc(int r, int c) {
 
 
 void move() {
-	string temp;
+	vector<int> temp;
 	temp.clear();
+
 	for (int i = 0;i <= height; i++){
-		temp += arr[row][col][i];
+		temp.push_back(v[row][col][i]);
 	}
+	
 	for (int i = 0;i <= height;i++) {
-		arr[row][col].erase(arr[row][col].begin());
+		v[row][col].erase(v[row][col].begin());
 	}
 
 	if (temp.size() == 0) return;
@@ -74,13 +77,13 @@ void move() {
 
 	if (dir != -1) {
 		for (int i = temp.size()-1;i >= 0;i--) {
-			arr[row + dx[dir]][col + dy[dir]].insert(arr[row + dx[dir]][col + dy[dir]].begin(), temp[i]);
+			v[row + dx[dir]][col + dy[dir]].insert(v[row + dx[dir]][col + dy[dir]].begin(), temp[i]);
 		}
 	}
 	else {
 		if (temp.size() == 0) return;
 		for (int i = temp.size() - 1;i >= 0;i--) {
-			arr[row][col].insert(arr[row][col].begin(), temp[i]);
+			v[row][col].insert(v[row][col].begin(), temp[i]);
 		}
 	}
 }
@@ -88,12 +91,12 @@ void move() {
 void print() {
 	for (int i = 0;i < n;i++) {
 		for (int j = 0;j < n;j++) {
-			if (arr[i][j].empty()) {
+			if (v[i][j].empty()) {
 				cout << "None" << "\n";
 			}
 			else {
-				for (int k = 0;k < arr[i][j].size();k++) {
-					cout << arr[i][j][k] << " ";
+				for (int k = 0;k < v[i][j].size();k++) {
+					cout << v[i][j][k] << " ";
 				}
 				cout << "\n";
 			}
@@ -102,10 +105,14 @@ void print() {
 }
 
 int main() {
+	freopen("input.txt", "r", stdin);
+	
 	cin >> n >> m;
 	for (int i = 0;i < n;i++) {
 		for (int j = 0;j < n;j++) {
-			cin >> arr[i][j];
+			int temp=0;
+			cin >> temp;
+			v[i][j].push_back(temp);
 		}
 	}
 
@@ -114,10 +121,7 @@ int main() {
 		cin >> temp;
 		find(temp);
 		move();
-		
 	}
-
 	print();
-	
 
 }
