@@ -6,7 +6,6 @@
 using namespace std;
 
 int t, n;
-
 int row;
 int col;
 char dir;
@@ -17,7 +16,6 @@ int dy[4] = { 0,1,0,-1 };
 
 
 map<pair<int, int>, pair<int, int>> m;
-
 
 pair<int, int> vlist[101];
 pair<int, int> wlist[101];
@@ -63,7 +61,6 @@ int main() {
         ans = 0;
         flag = 0;
 
-        //초기화 공부해볼것..
         vlist_clear();
 
         indexlist.clear();
@@ -95,7 +92,7 @@ int main() {
             }
             //for(int i=0;i<sz;i++)
             
-            
+       
             eraser.clear();
             for (int i = 0;i < sz;i++) {
 
@@ -120,7 +117,7 @@ int main() {
 
             sz = indexlist.size();
             eraser.clear();
-
+            
             for (int i = 0;i < sz;i++) {
                 row = vlist[indexlist[i]].first;
                 col = vlist[indexlist[i]].second;
@@ -135,8 +132,8 @@ int main() {
                             if (wei_arr[indexlist[i]] > wei_arr[indexlist[j]]) eraser.push_back(j);
                             else if (wei_arr[indexlist[i]] < wei_arr[indexlist[j]]) eraser.push_back(i);
                             else {
-                                if (i < j) eraser.push_back(i);
-                                else eraser.push_back(j);
+                                eraser.push_back(i);
+                                
                             }
                             flag = 1;
 
@@ -145,7 +142,7 @@ int main() {
                     }
                 }
             }
-
+            
             for (int i = eraser.size() - 1;i >= 0;i--) {
                 indexlist.erase(indexlist.begin() + eraser[i]);
             }
@@ -156,34 +153,35 @@ int main() {
             flag = 0;
             timer++;
             m.clear();
-
+            
             
             for (int i = 0;i < sz; i++) {
+               
                 row = vlist[indexlist[i]].first;
                 col = vlist[indexlist[i]].second;
 
                 auto it = m.find({ row,col });
+                
                 if (it == m.end()) {
                     m.insert({ {row,col},{wei_arr[indexlist[i]],i} });
+                   
                 }
                 else {
                     if (it->second.first > wei_arr[indexlist[i]]) {
                         eraser.push_back(i);
+                       
                     }
                     else {
                         eraser.push_back(it->second.second);
-                        m[{row, col}] = { wei_arr[indexlist[i]],indexlist[i]};
-
+                        m[{row, col}] = { wei_arr[indexlist[i]],i };
+                        
                     }
                     flag = 1;
-
+                    
                 }
+                
             }
           
-            for (int i = eraser.size() - 1;i >= 0;i--) {
-                indexlist.erase(indexlist.begin() + eraser[i]);
-            }
-
             if (flag == 1) {
                 ans = timer;
             }
