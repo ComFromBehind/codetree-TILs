@@ -74,9 +74,8 @@ int main() {
             intdir = trans_dir(dir);
             dir_arr[i] = intdir;
         }
-
-        int max_t = 3;
-        //int max_t = 2002;
+        
+        int max_t = 2002;
         int timer = 1;
 
         while (max_t--) {
