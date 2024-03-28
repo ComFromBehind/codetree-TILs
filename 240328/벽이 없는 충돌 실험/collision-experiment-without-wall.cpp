@@ -6,6 +6,9 @@
 using namespace std;
 
 int t, n;
+
+
+
 int row;
 int col;
 char dir;
@@ -41,6 +44,14 @@ void vlist_clear() {
 vector<int> indexlist;
 vector<int> eraser;
 
+//void print() {
+//    for (int i = 0;i < n;i++) {
+//        (dir_arr[i] == -1) ? cout << "0" : cout << "1";
+//        cout << "\n";
+//        cout << vlist[i].first << " " << vlist[i].second << " " << "\n";
+//    }
+//}
+
 int flag = 0;
 int ans = 0;
 int sz;
@@ -52,6 +63,8 @@ void print() {
 }
 
 int main() {
+
+  
 
     cin >> t;
     int cnt = 0;
@@ -99,12 +112,12 @@ int main() {
                 row = vlist[indexlist[i]].first;
                 col = vlist[indexlist[i]].second;
 
-               /* if (row < 0 || row>2000 || col < 0 || col>2000) {
+                if (row < 0 || row>2000 || col < 0 || col>2000) {
 
 
                     eraser.push_back(i);
                     continue;
-                }*/
+                }
 
                 intdir = dir_arr[indexlist[i]];
                 weight = wei_arr[indexlist[i]];
@@ -158,10 +171,7 @@ int main() {
             flag = 0;
             timer++;
             m.clear();
-            map<int, int> k;
-            for (int i = 0;i < sz;i++) {
-                vlist[indexlist[i]] = wlist[indexlist[i]];
-            }
+            
             
     
 
