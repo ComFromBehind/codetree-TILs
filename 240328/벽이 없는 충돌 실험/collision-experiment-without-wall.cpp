@@ -12,11 +12,9 @@ int col;
 char dir;
 int weight;
 int intdir;
-int row2, col2, weight2;
 int dx[4] = { 1,0,-1,0 };
 int dy[4] = { 0,1,0,-1 };
 
-typedef tuple<int, int, int> ball;
 
 map<pair<int, int>, pair<int, int>> m;
 
@@ -40,6 +38,10 @@ void vlist_clear() {
     }
 }
 
+
+vector<int> indexlist;
+vector<int> eraser;
+
 //void print() {
 //    for (int i = 0;i < n;i++) {
 //        (dir_arr[i] == -1) ? cout << "0" : cout << "1";
@@ -50,6 +52,7 @@ void vlist_clear() {
 
 int flag = 0;
 int ans = 0;
+int sz;
 
 int main() {
 
@@ -63,102 +66,123 @@ int main() {
         //초기화 공부해볼것..
         vlist_clear();
 
+        indexlist.clear();
+
         for (int i = 0;i < n;i++) { //ball 등록과정
             cin >> row >> col >> weight >> dir;
             row += 1001;
             col += 1001;
             vlist[i] = { row - 1,col - 1 };
             wei_arr[i] = weight;
-
             wlist[i] = vlist[i];
             intdir = trans_dir(dir);
             dir_arr[i] = intdir;
+            indexlist.push_back(i);
         }
+        
+
         
         int max_t = 2002;
         int timer = 1;
 
+
         while (max_t--) {
             flag = 0;
 
-
-            for (int i = 0;i <= n;i++) {
-                wlist[i] = vlist[i];
+            sz = indexlist.size();
+            for (int i = 0; i < sz;i++) {
+                wlist[indexlist[i]] = vlist[indexlist[i]];
             }
+            //for(int i=0;i<sz;i++)
+            
+            
+            eraser.clear();
+            for (int i = 0;i < sz;i++) {
 
-            for (int i = 0;i < n;i++) {
 
-                if (dir_arr[i] == -1) continue;
-                row = vlist[i].first;
-                col = vlist[i].second;
+                //if (dir_arr[i] == -1) continue;
+                row = vlist[indexlist[i]].first;
+                col = vlist[indexlist[i]].second;
 
                 if (row < 0 || row>2000 || col < 0 || col>2000) {
-                    dir_arr[i] = -1;
+                    eraser.push_back(i);
                     continue;
                 }
 
-                intdir = dir_arr[i];
-                weight = wei_arr[i];
-                vlist[i] = { row + dx[intdir], col + dy[intdir] };
-
-
-
+                intdir = dir_arr[indexlist[i]];
+                weight = wei_arr[indexlist[i]];
+                vlist[indexlist[i]] = { row + dx[intdir], col + dy[intdir] };
             }
 
-            for (int i = 0;i < n;i++) {
-                if (dir_arr[i] == -1) continue;
-                row = vlist[i].first;  //v는 지금 리스트 //wlist는 과거..
-                col = vlist[i].second;
+            for (int i = eraser.size()-1;i >=0 ;i--) {
+                indexlist.erase(indexlist.begin() + eraser[i]);
+            }
 
-                int bef_row = wlist[i].first;
-                int bef_col = wlist[i].second;
+            sz = indexlist.size();
+            eraser.clear();
 
+            for (int i = 0;i < sz;i++) {
+                row = vlist[indexlist[i]].first;
+                col = vlist[indexlist[i]].second;
 
+                int bef_row = wlist[indexlist[i]].first;
+                int bef_col = wlist[indexlist[i]].second;
 
-                for (int j = 0;j < n;j++) {
-                    if (j == i || dir_arr[j] == -1) continue;
-                    if (wlist[j] == vlist[i]) {
-                        if (wlist[i] == vlist[j]) {
-                            if (wei_arr[i] > wei_arr[j]) dir_arr[j] = -1;
-                            else if (wei_arr[i] < wei_arr[j]) dir_arr[i] = -1;
+                for (int j = i;j < sz;j++) {
+                    if (j == i) continue;
+                    if (wlist[indexlist[j]] == vlist[indexlist[i]]) {
+                        if (wlist[indexlist[i]] == vlist[indexlist[j]]) {
+                            if (wei_arr[indexlist[i]] > wei_arr[indexlist[j]]) eraser.push_back(j);
+                            else if (wei_arr[indexlist[i]] < wei_arr[indexlist[j]]) eraser.push_back(i);
                             else {
-                                if (i < j) dir_arr[i] = -1;
-                                else dir_arr[j] = -1;
+                                if (i < j) eraser.push_back(i);
+                                else eraser.push_back(j);
                             }
                             flag = 1;
 
                             ans = timer;
-                        }
+                        }  
                     }
                 }
             }
+
+            for (int i = eraser.size() - 1;i >= 0;i--) {
+                indexlist.erase(indexlist.begin() + eraser[i]);
+            }
+
+            sz = indexlist.size();
+            eraser.clear();
+
             flag = 0;
             timer++;
             m.clear();
-            for (int i = 0;i < n;i++) {
-                if (dir_arr[i] == -1) continue;
-                row = vlist[i].first;
-                col = vlist[i].second;
 
-                intdir = dir_arr[i];
+            
+            for (int i = 0;i < sz; i++) {
+                row = vlist[indexlist[i]].first;
+                col = vlist[indexlist[i]].second;
+
                 auto it = m.find({ row,col });
                 if (it == m.end()) {
-                    m.insert({ {row,col},{wei_arr[i],i} });
+                    m.insert({ {row,col},{wei_arr[indexlist[i]],i} });
                 }
                 else {
-                    if (it->second.first > wei_arr[i]) {
-                        dir_arr[i] = -1;
+                    if (it->second.first > wei_arr[indexlist[i]]) {
+                        eraser.push_back(i);
                     }
                     else {
-                        dir_arr[it->second.second] = -1;
-                        m[{row, col}] = { wei_arr[i],i };
+                        eraser.push_back(it->second.second);
+                        m[{row, col}] = { wei_arr[indexlist[i]],indexlist[i]};
 
                     }
                     flag = 1;
 
                 }
             }
-
+          
+            for (int i = eraser.size() - 1;i >= 0;i--) {
+                indexlist.erase(indexlist.begin() + eraser[i]);
+            }
 
             if (flag == 1) {
                 ans = timer;
