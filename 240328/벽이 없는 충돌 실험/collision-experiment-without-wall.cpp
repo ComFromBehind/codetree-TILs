@@ -17,6 +17,7 @@ int dy[4] = { 0,1,0,-1 };
 
 map<pair<int, int>, pair<int, int>> m;
 
+
 pair<int, int> vlist[101];
 pair<int, int> wlist[101];
 int dir_arr[101];
@@ -40,27 +41,27 @@ void vlist_clear() {
 vector<int> indexlist;
 vector<int> eraser;
 
-//void print() {
-//    for (int i = 0;i < n;i++) {
-//        (dir_arr[i] == -1) ? cout << "0" : cout << "1";
-//        cout << "\n";
-//        cout << vlist[i].first << " " << vlist[i].second << " " << "\n";
-//    }
-//}
-
 int flag = 0;
 int ans = 0;
 int sz;
 
+void print() {
+    for (int i = 0;i < indexlist.size();i++) {
+        cout << vlist[indexlist[i]].first << " " << vlist[indexlist[i]].second << " " << wei_arr[indexlist[i]] << "\n";
+    }
+}
+
 int main() {
 
     cin >> t;
+    int cnt = 0;
     while (t--) {
         cin >> n;
-
+        cnt++;
         ans = 0;
         flag = 0;
 
+        //초기화 공부해볼것..
         vlist_clear();
 
         indexlist.clear();
@@ -77,11 +78,10 @@ int main() {
             indexlist.push_back(i);
         }
         
-
+        
         
         int max_t = 2002;
         int timer = 1;
-
 
         while (max_t--) {
             flag = 0;
@@ -91,33 +91,33 @@ int main() {
                 wlist[indexlist[i]] = vlist[indexlist[i]];
             }
             //for(int i=0;i<sz;i++)
-            
-       
+
+
             eraser.clear();
             for (int i = 0;i < sz;i++) {
 
-
-                //if (dir_arr[i] == -1) continue;
                 row = vlist[indexlist[i]].first;
                 col = vlist[indexlist[i]].second;
 
-                if (row < 0 || row>2000 || col < 0 || col>2000) {
+               /* if (row < 0 || row>2000 || col < 0 || col>2000) {
+
+
                     eraser.push_back(i);
                     continue;
-                }
+                }*/
 
                 intdir = dir_arr[indexlist[i]];
                 weight = wei_arr[indexlist[i]];
                 vlist[indexlist[i]] = { row + dx[intdir], col + dy[intdir] };
             }
 
-            for (int i = eraser.size()-1;i >=0 ;i--) {
+            for (int i = eraser.size() - 1;i >= 0;i--) {
                 indexlist.erase(indexlist.begin() + eraser[i]);
             }
 
             sz = indexlist.size();
             eraser.clear();
-            
+
             for (int i = 0;i < sz;i++) {
                 row = vlist[indexlist[i]].first;
                 col = vlist[indexlist[i]].second;
@@ -129,63 +129,93 @@ int main() {
                     if (j == i) continue;
                     if (wlist[indexlist[j]] == vlist[indexlist[i]]) {
                         if (wlist[indexlist[i]] == vlist[indexlist[j]]) {
-                            if (wei_arr[indexlist[i]] > wei_arr[indexlist[j]]) eraser.push_back(j);
-                            else if (wei_arr[indexlist[i]] < wei_arr[indexlist[j]]) eraser.push_back(i);
+                            
+                            if (wei_arr[indexlist[i]] > wei_arr[indexlist[j]]) {
+                                eraser.push_back(j);
+                            }
+                            else if (wei_arr[indexlist[i]] < wei_arr[indexlist[j]]) {
+                                eraser.push_back(i); 
+                            }
                             else {
-                                eraser.push_back(i);
-                                
+                                eraser.push_back(i); 
                             }
                             flag = 1;
-
+                            
+                            
+                          
                             ans = timer;
-                        }  
+                        }
                     }
                 }
             }
-            
+
             for (int i = eraser.size() - 1;i >= 0;i--) {
                 indexlist.erase(indexlist.begin() + eraser[i]);
             }
 
             sz = indexlist.size();
             eraser.clear();
-
             flag = 0;
             timer++;
             m.clear();
+            map<int, int> k;
+            for (int i = 0;i < sz;i++) {
+                vlist[indexlist[i]] = wlist[indexlist[i]];
+            }
             
-            
+    
+
             for (int i = 0;i < sz; i++) {
+
                
-                row = vlist[indexlist[i]].first;
-                col = vlist[indexlist[i]].second;
+                row = wlist[indexlist[i]].first;
+                col = wlist[indexlist[i]].second;
+                intdir = dir_arr[indexlist[i]];
+                weight = wei_arr[indexlist[i]];
+                vlist[indexlist[i]] = { row + dx[intdir], col + dy[intdir] };
+                row = row + dx[intdir];
+                col = col + dy[intdir];
 
                 auto it = m.find({ row,col });
                 
                 if (it == m.end()) {
                     m.insert({ {row,col},{wei_arr[indexlist[i]],i} });
-                   
+                    
                 }
                 else {
-                    if (it->second.first > wei_arr[indexlist[i]]) {
+                    pair<int, int> temp = it->second;
+                    if (temp.first > wei_arr[indexlist[i]]) {
+                        
                         eraser.push_back(i);
                        
+
                     }
                     else {
-                        eraser.push_back(it->second.second);
+                        
+                        eraser.push_back(temp.second);
                         m[{row, col}] = { wei_arr[indexlist[i]],i };
                         
                     }
                     flag = 1;
                     
+                   
+
                 }
                 
+
+            }
+            
+
+            for (int i = eraser.size()-1;i >=0;i--) {
+                indexlist.erase(indexlist.begin() + eraser[i]);
             }
           
             if (flag == 1) {
                 ans = timer;
+
             }
             timer++;
+
 
         }
 
