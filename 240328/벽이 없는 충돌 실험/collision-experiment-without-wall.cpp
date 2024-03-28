@@ -18,7 +18,7 @@ int dy[4] = { 0,1,0,-1 };
 
 typedef tuple<int, int, int> ball;
 
-map<pair<int, int>,pair<int,int>> m;
+map<pair<int, int>, pair<int, int>> m;
 
 
 pair<int, int> vlist[101];
@@ -52,60 +52,60 @@ int flag = 0;
 int ans = 0;
 
 int main() {
-   
+
     cin >> t;
     while (t--) {
         cin >> n;
-        
+
         ans = 0;
         flag = 0;
-        
+
         //초기화 공부해볼것..
         vlist_clear();
-        
+
         for (int i = 0;i < n;i++) { //ball 등록과정
             cin >> row >> col >> weight >> dir;
             row += 1001;
             col += 1001;
             vlist[i] = { row - 1,col - 1 };
             wei_arr[i] = weight;
-            
+
             wlist[i] = vlist[i];
             intdir = trans_dir(dir);
             dir_arr[i] = intdir;
         }
-               
-        int max_t = 2002;
+
+        int max_t = 3;
         //int max_t = 2002;
-        int timer = 0;
-  
+        int timer = 1;
+
         while (max_t--) {
             flag = 0;
-            
-       
+
+
             for (int i = 0;i <= n;i++) {
                 wlist[i] = vlist[i];
             }
-        
+
             for (int i = 0;i < n;i++) {
-                
+
                 if (dir_arr[i] == -1) continue;
                 row = vlist[i].first;
                 col = vlist[i].second;
-                
-                if (row <0 || row>2000|| col<0||col>2000) {
+
+                if (row < 0 || row>2000 || col < 0 || col>2000) {
                     dir_arr[i] = -1;
                     continue;
                 }
-                
+
                 intdir = dir_arr[i];
                 weight = wei_arr[i];
                 vlist[i] = { row + dx[intdir], col + dy[intdir] };
-          
-          
-               
+
+
+
             }
-            
+
             for (int i = 0;i < n;i++) {
                 if (dir_arr[i] == -1) continue;
                 row = vlist[i].first;  //v는 지금 리스트 //wlist는 과거..
@@ -114,8 +114,8 @@ int main() {
                 int bef_row = wlist[i].first;
                 int bef_col = wlist[i].second;
 
-          
-                
+
+
                 for (int j = 0;j < n;j++) {
                     if (j == i || dir_arr[j] == -1) continue;
                     if (wlist[j] == vlist[i]) {
@@ -127,7 +127,7 @@ int main() {
                                 else dir_arr[j] = -1;
                             }
                             flag = 1;
-                         
+
                             ans = timer;
                         }
                     }
@@ -143,29 +143,29 @@ int main() {
 
                 intdir = dir_arr[i];
                 auto it = m.find({ row,col });
-                if (it==m.end()) {
-                    m.insert({ {row,col},{wei_arr[i],i}});
+                if (it == m.end()) {
+                    m.insert({ {row,col},{wei_arr[i],i} });
                 }
                 else {
-                    if(it->second.first > wei_arr[i]) {
+                    if (it->second.first > wei_arr[i]) {
                         dir_arr[i] = -1;
                     }
                     else {
                         dir_arr[it->second.second] = -1;
                         m[{row, col}] = { wei_arr[i],i };
-                       
+
                     }
                     flag = 1;
-                   
+
                 }
             }
-            
 
-            timer++;
+
             if (flag == 1) {
                 ans = timer;
             }
-            
+            timer++;
+
         }
 
         if (ans == 0) {
