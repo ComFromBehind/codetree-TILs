@@ -13,7 +13,7 @@ int calc(){
     while(cnt<sz){
         char now = s[cnt];
         int trans_now = s[cnt]-'0';
-        for(int i=0;i<trans_now-1;i++){
+        for(int i=0;i<=trans_now-1;i++){
             if(cnt+i>=sz) {flag=1; return 0;}
             if(s[cnt+i]!=now) {flag=1; return 0;}
         }
