@@ -89,7 +89,6 @@ int main() {
             vlist[i] = { row - 1,col - 1 };
             //vlist[i] = { row,col };
             wei_arr[i] = weight;
-            wlist[i] = vlist[i];
             intdir = trans_dir(dir);
             dir_arr[i] = intdir;
             indexlist.push_back(i);
@@ -136,7 +135,7 @@ int main() {
            
                 
             }
-            sort(eraser.begin(), eraser.end());
+            
             for (int i = eraser.size() - 1;i >= 0;i--) {
                 indexlist.erase(indexlist.begin() + eraser[i]);
                 //cout << indexlist[eraser[i]] << "삭제 수행\n";
