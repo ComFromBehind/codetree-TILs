@@ -65,6 +65,10 @@ void print() {
 
 int main() {
 
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
     cin >> t;
     int cnt = 0;
     while (t--) {
@@ -148,8 +152,8 @@ int main() {
                 int bef_row = wlist[indexlist[i]].first;
                 int bef_col = wlist[indexlist[i]].second;
 
-                for (int j = i;j < sz;j++) {
-                    if (j == i) continue;
+                for (int j = i+1;j < sz;j++) {
+                    
                     if (wlist[indexlist[j]] == vlist[indexlist[i]]) {
                         if (wlist[indexlist[i]] == vlist[indexlist[j]]) {
 
@@ -185,20 +189,11 @@ int main() {
             flag = 0;
             timer++;
             m.clear();
-
-
-
-
+            
             for (int i = 0;i < sz; i++) {
 
-
-                row = wlist[indexlist[i]].first;
-                col = wlist[indexlist[i]].second;
-                intdir = dir_arr[indexlist[i]];
-                weight = wei_arr[indexlist[i]];
-                vlist[indexlist[i]] = { row + dx[intdir], col + dy[intdir] };
-                row = row + dx[intdir];
-                col = col + dy[intdir];
+                row = vlist[indexlist[i]].first;
+                col = vlist[indexlist[i]].second;
 
                 auto it = m.find({ row,col });
 
