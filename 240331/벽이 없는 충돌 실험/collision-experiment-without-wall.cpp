@@ -251,10 +251,10 @@ int main() {
             cout << t;*/
         
 
-        cout << ans << "\n";
-        /*if (ans == 0) {
+        
+        if (ans == 0) {
             cout << -1 << "\n";
         }
-        else cout << ans << "\n";*/
+        else cout << ans << "\n";
     }
 }
