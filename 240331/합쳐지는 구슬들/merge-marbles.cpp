@@ -42,12 +42,13 @@ void simul(){
         
         if(nx<0||nx>=n||ny<0||ny>=n){
             intd = 3-intd;
-            nx = r+dx[intd];
-            ny = c+dy[intd];
+            
         }
-
-        r = nx;
-        c = ny;
+        
+        else{
+            r = nx;
+            c = ny;
+        } 
 
         it=mm.find({r,c});
 
@@ -79,11 +80,11 @@ void v_store(){
     for(it=mm.begin();it!=mm.end();it++){
         int tmp1,tmp2,tmp3,tmp4,tmp5;
         
-        tie(tmp1,tmp2) = it->first;
-    
+        tie(tmp1,tmp2) = it->first; //tmp1, tmp2 가 r,c
 
-        tie(tmp3,tmp4,tmp5) = it->second;
-        tie(idx, r, c,intd, w) = tie(tmp1,tmp2,tmp3,tmp4,tmp5);
+
+        tie(tmp3,tmp4,tmp5) = it->second; // 각각 idx, intd, w
+        tie(idx, r, c,intd, w) = tie(tmp3,tmp1,tmp2,tmp4,tmp5);
         b = tie(idx,r,c,intd,w);
         v.push_back(b);
        
@@ -103,6 +104,7 @@ int main(){
     while(t--){
         simul();
         v_store();
+        
     }
 
     cout<<v.size()<<" "<<ans; // 남아있는 구슬의 개수와 가장 무거운 구슬무게
