@@ -102,7 +102,7 @@ int main() {
 
 
 
-        int max_t = 1002;
+        int max_t = 2002;
         int timer = 1;
 
         while (max_t--) {
