@@ -25,32 +25,7 @@ bool check_vec(vector<int> s, vector<int> t) {
     return true;
 }
 
-vector<int> ans_fill2() {
-    vector<int> s;
-    for (int i = 1;i <= n;i++) {
-        int row = 0;
-        int j = i;
-        while (row <= 16){
-            if (brr[row + 1][j] == make_pair(0,0)) {
-                row++;
-            }
-            else {
-                if (j <= n - 1 && brr[row + 1][j + 1].second != 0 && brr[row + 1][j].second == brr[row + 1][j + 1].second + 1) {
-                    row++; j += 1;
-                }
-                else  {
-                    row++; j -= 1;
-                }
-            }
-            
-        }
-        
-        s.push_back(j);
-    }
-    return s;
-}
-
-vector<int> ans_fill() {
+vector<int> ans_fill(pair<int,int> arr[][18]) {
     vector<int> s;
     
     for (int i = 1;i <= n;i++) {
@@ -69,13 +44,10 @@ vector<int> ans_fill() {
                     row++;
                     j--;
                 }
-            }
-            
+            }   
         }
-        
         s.push_back(j);
     }
-
     return s;
 }
 
@@ -92,9 +64,9 @@ int count_brr() {
 }
 
 void func(int k) {
-    
     if (k == m) {
-        vector<int> temp = ans_fill2();
+        
+        vector<int> temp = ans_fill(brr);
         
         if (check_vec(temp, anslist)) {
             int temphubo = count_brr();
@@ -102,15 +74,12 @@ void func(int k) {
         }
         return;
     }
-
     brr[v[k].first][v[k].second] = { v[k].first, v[k].second + 1 };
     brr[v[k].first][v[k].second + 1] = { v[k].first, v[k].second };
     func(k + 1);
     brr[v[k].first][v[k].second] = { 0,0};
     brr[v[k].first][v[k].second + 1] = { 0,0 };
     func(k + 1);
-
-
 }
 
 int main() {
@@ -123,11 +92,9 @@ int main() {
         v.push_back({ y,x });
         arr[y][x] = { y, x + 1 };
         arr[y][x + 1] = { y, x };
- 
     }
-    anslist = ans_fill();
     
+    anslist = ans_fill(arr);
     func(0);
-
     cout << ans;
 }
