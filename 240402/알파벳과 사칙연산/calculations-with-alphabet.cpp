@@ -10,7 +10,7 @@ int check[6] = {-1,-1,-1,-1,-1,-1};
 vector<int> alpha;
 int m;
 
-int ans;
+int ans=-1e8;
 int arr[6]; //숫자 매핑
 
 vector<int> mapping;
@@ -72,7 +72,7 @@ int main(){
             if(check[s[i]-'a']==-1){
                 check[s[i]-'a']=0;
                 alpha.push_back(s[i]-'a'); //alpha에는 스트링에 들어잇는 문자대표 1개씩 들어잇음.
-        
+
             }
         }
     }
