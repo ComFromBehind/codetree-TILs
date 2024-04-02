@@ -10,7 +10,7 @@ int check[6] = {-1,-1,-1,-1,-1,-1};
 vector<int> alpha;
 int m;
 
-int ans=-1e8;
+int ans=-2147483648;
 int arr[6]; //숫자 매핑
 
 vector<int> mapping;
