@@ -21,7 +21,7 @@ void calc(){
     char op2 = ' ';
     for(int i=0;i<s.length();i++){
         if(s[i]>='a'&&s[i]<='f'){
-            if(cnt==0){
+            if(cnt==0&&i==0){
                 cnt = arr[s[i]-'a'];
             }
             else{
