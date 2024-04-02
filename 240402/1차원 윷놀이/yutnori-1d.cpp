@@ -10,7 +10,7 @@ using namespace std;
 
 int mvlist[13];
 
-int check[5]; //이 값이 m이상인지 아닌지로 판단!
+int check[5]={1,1,1,1,1}; //이 값이 m이상인지 아닌지로 판단!
 
 vector<int> waitlist;
 int ans = 0;
