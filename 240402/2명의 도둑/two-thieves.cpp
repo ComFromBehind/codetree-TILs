@@ -40,7 +40,7 @@ void func2(int k){
         for(int i=0;i<tmp.size();i++){
             sum+=arr[w[tmp[i]].first][w[tmp[i]].second];
         }
-        if(sum>c) {smallans = 0; return;}
+        if(sum>c) {return;}
 
         int temp_weight = 0;
         for(int i=0;i<tmp.size();i++){
