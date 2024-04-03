@@ -16,9 +16,9 @@ void func(int k, int idx){
     }
 
     if(k==m){
-        int tmp = v[0];
-        for(int i=1;i<v.size();i++){
-            tmp = (tmp^v[i]);
+        int tmp = arr[v[0]];
+        for(int i=1;i<m;i++){
+            tmp = (tmp^arr[v[i]]);
         }
         ans = max(ans, tmp);
         return;
