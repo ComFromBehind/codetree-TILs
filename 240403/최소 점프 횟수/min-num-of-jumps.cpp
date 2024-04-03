@@ -12,11 +12,10 @@ void func(int k, int cnt){
         ans = min(ans, cnt );
         return;
     }
-
     int c = arr[k];
     if(c==0) return;
     for(int i=1;i<=c;i++){
-        func(k+c, cnt+1);
+        func(k+i, cnt+1);
     }
 }
 
