@@ -37,7 +37,10 @@ int calc(){
 
 void func(int k, int index){
     if(k==3){
-        
+        // for(int i=0;i<ans.size();i++){
+        //     cout<<ans[i]<<" ";
+        // }
+        // cout<<"\n";
         int cnt = calc();
         realans = min(realans,cnt);
 
@@ -47,7 +50,8 @@ void func(int k, int index){
         if(brr[i]!=make_pair(-1,-1)&&check[i]!=1){
             check[i] = 1;
             ans.push_back(i);
-            func(k+1,index+1);
+            
+            func(k+1,i+1);
             ans.pop_back();
             check[i] = 0;
         }
