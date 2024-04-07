@@ -80,7 +80,9 @@ int main(){
 
     func(0);
 
-    cout<<realans;
+    if(realans==1e9) cout<<-1;
+    else
+        cout<<realans;
     
 
 
