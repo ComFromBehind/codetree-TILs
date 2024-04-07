@@ -35,7 +35,7 @@ int calc(){
     return sum;
 }
 
-void func(int k){
+void func(int k, int index){
     if(k==3){
         
         int cnt = calc();
@@ -43,11 +43,11 @@ void func(int k){
 
         return;
     }
-    for(int i=1;i<10;i++){
+    for(int i=index;i<10;i++){
         if(brr[i]!=make_pair(-1,-1)&&check[i]!=1){
             check[i] = 1;
             ans.push_back(i);
-            func(k+1);
+            func(k+1,index+1);
             ans.pop_back();
             check[i] = 0;
         }
@@ -78,7 +78,7 @@ int main(){
 
     }
 
-    func(0);
+    func(0,0);
 
     if(realans==1e9) cout<<-1;
     else
