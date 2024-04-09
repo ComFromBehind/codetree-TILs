@@ -9,29 +9,30 @@ vector<int> list;
 int ans = 1e9;
 int sum; 
 
-void func(int k){
+void func(int k, int cnt){
     if(k==2*n+1){
-        
-        int temp=0;
+        if(cnt!=n) return;
+    }
+    if(cnt==n){
+        int temp =0;
         for(int i=0;i<list.size();i++){
             temp+=list[i];
+            //cout<<list[i]<<" ";
         }
+        
         ans = min(abs(sum-temp-temp),ans);
+        //cout<<ans<<"\n";
         return;
     }
-    int temp=0;
-    for(int i=0;i<list.size();i++){
-        temp+=list[i];;
-    }
+    if(k==0)
+        func(k+1, cnt);
     
-    ans = min(abs(sum-temp-temp),ans);
-   
-
-    list.push_back(inputv[k]);
-    func(k+1);
+    else{
+    list.push_back(inputv[k-1]);
+    func(k+1 , cnt+1);
     list.pop_back();
-    func(k+1);
-
+    func(k+1, cnt);
+    }
 }
 
 int main(){
@@ -46,7 +47,7 @@ int main(){
 
     sort(inputv.begin(),inputv.end());
 
-    func(0);
+    func(0,0);
 
     cout<<ans;
 }
