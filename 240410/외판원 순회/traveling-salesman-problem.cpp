@@ -10,7 +10,9 @@ int ans= 1e9;
 
 void func(int k,int prev,int cnt){
     if(k==n-1){
+        if(arr[prev][0]==0) return;
         if((cnt+arr[prev][0]) < ans) ans = (cnt+arr[prev][0]);
+        
         return;
     }
 
