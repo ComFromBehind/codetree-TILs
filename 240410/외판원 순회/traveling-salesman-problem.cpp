@@ -8,15 +8,19 @@ bool check[11];
 
 int ans= 1e9;
 
-void func(int k, int cnt){
-    if(k==n){
-        if(cnt < ans) ans = cnt;
+void func(int k,int prev,int cnt){
+    if(k==n-1){
+        if((cnt+arr[prev][0]) < ans) ans = (cnt+arr[prev][0]);
         return;
     }
-    for(int i=0;i<n;i++){
-        if(k!=i&&!check[i]){
+
+    for(int i=1;i<n;i++){
+        
+        if(!check[i]&&arr[prev][i]!=0){
             check[i] = 1;
-            func(k+1, cnt+arr[k][i]);
+            
+            func(k+1, i ,cnt+arr[prev][i]);
+            
             check[i] = 0;
         }
     }
@@ -29,7 +33,7 @@ int main(){
             cin>> arr[i][j];
         }
     }
-    
-    func(0,0);
+    check[0] = 1;
+    func(0,0,0);
     cout<<ans;
 }
