@@ -46,7 +46,7 @@ int main() {
 	}
 	for (int i = 0;i < k;i++) {
 		cin >> a >> b;
-		q.push({ a,b });
+		q.push({ a-1,b-1 });
 		bfs();
 	}
 	cout << ans;
