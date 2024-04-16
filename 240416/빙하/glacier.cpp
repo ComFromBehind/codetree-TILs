@@ -45,6 +45,16 @@ void bfs(){
     }
 }
 
+void print(){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++) {
+            cout<<arr[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n\n";
+}
+
 int main(){
     cin>>n>>m;
     for(int i=0;i<n;i++){
@@ -53,10 +63,11 @@ int main(){
     check[0][0]= 1;
     q.push({0,0});
     while(1){
-      
+        
         bfs();
-        now++;
         if(q2.empty()) break;
+        now++;
+        
         count = 0;
         while(!q2.empty()){
             auto c = q2.front();
@@ -65,13 +76,15 @@ int main(){
             next_x = x;
             next_y = y;
             q2.pop();
-            
+           
             count++;
             arr[x][y] = 0;
+            q.push({next_x,next_y});
         }
-        q.push({next_x,next_y});
+        
+        
         
     }
-    cout<<now-1<<" "<<count;
+    cout<<now<<" "<<count;
 
 }
