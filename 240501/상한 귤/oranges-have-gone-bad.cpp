@@ -21,6 +21,9 @@ int main(){
         for(int j=0;j<n;j++){
             cin>>arr[i][j];
             check[i][j]=-1;
+            if(arr[i][j]==1){
+                check[i][j] = -2;
+            }
             if(arr[i][j]==2){
                 q.push({i,j});
                 check[i][j]=0;
@@ -34,10 +37,10 @@ int main(){
         int x = c.first;
         int y = c.second;
         for(int i=0;i<4;i++){
-            int nx = dx[i]+x;
+            int nx = dx[i] + x;
             int ny = dy[i] + y;
             if(nx<0||nx>=n||ny<0||ny>=n) continue;
-            if(check[nx][ny]!=-1) continue;
+            if(check[nx][ny]>-1) continue;
             if(arr[nx][ny]==0||arr[nx][ny]==2) continue;
             check[nx][ny] = check[x][y]+1;
             q.push({nx,ny});
