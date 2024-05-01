@@ -38,7 +38,7 @@ int main(){
             int ny = dy[i] + y;
             if(nx<0||nx>=n||ny<0||ny>=n) continue;
             if(check[nx][ny]!=-1) continue;
-            if(arr[nx][ny]==0) continue;
+            if(arr[nx][ny]==0||arr[nx][ny]==2) continue;
             check[nx][ny] = check[x][y]+1;
             q.push({nx,ny});
         }
