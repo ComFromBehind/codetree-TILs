@@ -14,7 +14,7 @@ int main(){
     arr[3] = 1;
 
     for(int i=4;i<=n;i++){
-        arr[n] = ((arr[n-2])%10007+ (arr[n-3])%10007)%10007;
+        arr[i] = ((arr[i-2]%10007)+ (arr[i-3]%10007))%10007;
     }
     
     cout<<arr[n];
