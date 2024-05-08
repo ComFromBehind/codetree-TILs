@@ -22,7 +22,7 @@ int main(){
         }
         sum+=2*arr[i-1];
         sum+=3*arr[i-2];
-        arr[i] = sum;
+        arr[i] = sum%1000000007;
     }
     cout<< arr[n];  
 }
