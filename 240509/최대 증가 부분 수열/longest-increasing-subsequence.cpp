@@ -10,17 +10,17 @@ int dp[1001];
 int main(){
     cin>>n;
     
-    for(int i=0;i<n;i++){
+    for(int i=1;i<=n;i++){
         cin>>arr[i];
     }
 
-    dp[0] = 1;
+    dp[0] = 0;
 
     for(int i=1;i<n;i++){
         dp[i] = -1e8;
     }
 
-    for(int i=1;i<n;i++){
+    for(int i=1;i<=n;i++){
         for(int j=0;j<i;j++){
             if(arr[j]<arr[i]){
                 dp[i] = max(dp[j]+1, dp[i]);
