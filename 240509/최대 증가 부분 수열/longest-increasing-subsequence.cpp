@@ -17,7 +17,7 @@ int main(){
     dp[0] = 1;
 
     for(int i=1;i<n;i++){
-        dp[i] = -1;
+        dp[i] = -1e8;
     }
 
     for(int i=1;i<n;i++){
