@@ -41,10 +41,9 @@ void paint_board(int num) {
 	check[row - 1][col - 1] = num;
 }
 
-void possible_move() {
-	row = 0;
+void move_to_south() {
 	block_check = 0;
-	while (block_check==0) {
+	while (block_check == 0) {
 
 		if (row + 1 > r) {
 			block_check = 1; continue;
@@ -54,9 +53,15 @@ void possible_move() {
 		if (check[row][col + 1] != 0) block_check = 1;
 		if (block_check != 1) {
 			row++;
-			
+
 		}
 	}
+}
+
+void possible_move() {
+	row = 0;
+	
+	move_to_south();
 
 	block_check = 0;
 	while (block_check == 0) {
@@ -79,6 +84,8 @@ void possible_move() {
 		}
 	}
 
+	move_to_south();
+
 	block_check = 0;
 	while (block_check == 0) {
 		if (col >= c - 1) {
@@ -98,6 +105,8 @@ void possible_move() {
 			
 		}
 	}
+
+	move_to_south();
 
 	if (row <= 2) reset_board();
 	else {
