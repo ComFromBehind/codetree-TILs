@@ -46,7 +46,9 @@ void possible_move() {
 	block_check = 0;
 	while (block_check==0) {
 
-		if (row + 1 > r) block_check = 1;
+		if (row + 1 > r) {
+			block_check = 1; continue;
+		}
 		if (check[row + 1][col] != 0) block_check = 1;
 		if (check[row][col - 1] != 0) block_check = 1;
 		if (check[row][col + 1] != 0) block_check = 1;
@@ -58,13 +60,19 @@ void possible_move() {
 
 	block_check = 0;
 	while (block_check == 0) {
-		if ( col <= 2 ) block_check = 1;
-		if (row + 1 > r) block_check = 1;
+		if (col <= 2) {
+			block_check = 1; continue;
+		}
+		if (row + 1 > r) {
+			block_check = 1; continue;
+		}
+		
 		if (check[row][col - 1] != 0) block_check = 1;
 		if (check[row + 1][col - 1] != 0) block_check = 1;
 		if (check[row ][col - 2] != 0) block_check = 1;
-		if (check[row - 1][col - 2] != 0)block_check = 1;
-		if (check[row - 2][col - 1] != 0) block_check = 1;
+		
+		if (row>=1&&check[row - 1][col - 2] != 0) block_check = 1;
+		if (row>=2&&check[row - 2][col - 1] != 0) block_check = 1;
 		if (block_check != 1) {
 			row++; col--; dir = (dir + 3) % 4;
 			
@@ -73,13 +81,18 @@ void possible_move() {
 
 	block_check = 0;
 	while (block_check == 0) {
-		if (col >= c - 1) block_check = 1;
-		if (row + 1 > r) block_check = 1;
+		if (col >= c - 1) {
+			block_check = 1; continue;
+		}
+		if (row + 1 > r) {
+			block_check = 1;
+			continue;
+		}
 		if (check[row][col + 1] != 0) block_check = 1;
 		if (check[row + 1][col + 1] != 0) block_check = 1;
 		if (check[row][col + 2] != 0) block_check = 1;
-		if (check[row - 1][col + 2] != 0) block_check = 1;
-		if (check[row - 2][col + 1] != 0)block_check = 1;
+		if (row>=1&&check[row - 1][col + 2] != 0) block_check = 1;
+		if (row>=2&&check[row - 2][col + 1] != 0)block_check = 1;
 		if (block_check != 1) {
 			row++; col++; dir = (dir + 1) % 4;
 			
