@@ -25,8 +25,8 @@ void reset_board() {
 }
 
 void print_board() {
-	for (int i = 0;i <= r;i++) {
-		for (int j = 0;j <= c;j++) {
+	for (int i = 1;i <= r;i++) {
+		for (int j = 1;j <= c;j++) {
 			cout << check[i][j];
 		}
 		cout << "\n";
@@ -82,7 +82,7 @@ void possible_move() {
 		}
 	}
 
-	if (row <= 1) reset_board();
+	if (row <= 2) reset_board();
 	else {
 		
 		int max = 0;
